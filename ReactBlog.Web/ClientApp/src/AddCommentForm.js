@@ -49,7 +49,8 @@ return(
             onChange={onTextChange}
             rows="3" />
         </div>
-        <button disabled={!commenter || !text}
+            <button
+        disabled={!commenter || !text}
         onClick={onSubmitClick}
         className="btn btn-primary">Submit</button>
 </div>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using ReactBlog.Data;
+using ReactBlog.Web.Models;
 
 namespace ReactBlog.Web.Controllers
 {
@@ -21,6 +22,22 @@ namespace ReactBlog.Web.Controllers
             _connectionString = configuration.GetConnectionString("ConStr");
         }
 
+        [HttpGet]
+        [Route("get")]
+        public ViewBlogsViewModel GetBlogPosts(int page)
+        {
+            int pageCount = 3;
+            int from = (page - 1) * pageCount;
+            var repo = new ReactBlogRepository(_connectionString);
+            var posts = repo.GetPosts(from, pageCount);
+            var totalCount = repo.GetTotalBlogPostCount();
+            return new ViewBlogsViewModel
+            {
+                Posts = posts,
+                TotalCount = totalCount
+            };
+        }
+
         [HttpPost]
         [Route("addpost")]
         public Post AddPost(Post post)
@@ -31,14 +48,7 @@ namespace ReactBlog.Web.Controllers
             return post;
         }
 
-        [HttpGet]
-        [Route("getposts")]
-        public List<Post> GetPosts()
-        {
-            var repo = new ReactBlogRepository(_connectionString);
-            var posts = repo.GetPosts();
-            return posts;
-        }
+    
 
         [HttpGet]
         [Route("getblogpost")]

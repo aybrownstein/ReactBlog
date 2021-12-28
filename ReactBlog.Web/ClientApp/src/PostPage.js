@@ -23,7 +23,7 @@ const PostPage = ({post}) => {
                     <small>{commentCount} comment(s)</small>
                 </div>
                 <Link to={`/viewBlog/${id}`} className="btn btn-primary">
-                    Read More &rarr </Link>
+                    Read More &rarr; </Link>
                 </div>
             <div className="card-footer text-muted">
                 Posted on {format(new Date(datePosted), 'cccc MMMM Lo, yyyy')}

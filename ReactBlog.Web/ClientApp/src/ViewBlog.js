@@ -20,7 +20,7 @@ const ViewBlog = () => {
             setIsLoading(false);
         }
         getPost();
-    });
+    },[id]);
 
     const onCommentSubmission = async () => {
         const {data} = await axios.get(`api/blog/getcomments?blogpostid=${id}`);

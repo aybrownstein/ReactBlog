@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import Layout from './Layout';
 import  Home  from './Home';
-
-
-import './custom.css'
 import MostRecent from './MostRecent';
 import NewPost from './NewPost';
 import ViewBlog from './ViewBlog';

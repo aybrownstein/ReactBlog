@@ -16,10 +16,17 @@ namespace ReactBlog.Data
             _connectionString = connectionString;
         }
 
-        public List<Post> GetPosts()
+        public List<Post> GetPosts(int skip, int amount)
         {
             using var context = new BlogDataContext(_connectionString);
-            return context.Posts.Include(p => p.Comments).ToList();
+            return context.Posts.Include(b => b.Comments).OrderByDescending(b => b.DatePosted)
+                .Skip(skip).Take(amount).ToList();
+        }
+
+        public int GetTotalBlogPostCount()
+        {
+            using var context = new BlogDataContext(_connectionString);
+            return context.Posts.Count();
         }
 
         public void AddPost(Post post)
